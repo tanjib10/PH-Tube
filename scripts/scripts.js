@@ -5,17 +5,15 @@ const loadCategory = async (category) => {
    data.data.forEach(category => {
       const div = document.createElement('div');
       div.innerHTML = `
-               <button onclick = "categoryData('${category.category_id}')" class="btn mr-4 hover:bg-red-500" >${category.category}</button>
+               <button onclick = "categoryData('${category.category_id}')" class="btn mr-4  hover:bg-red-500" >${category.category}</button>
       `
       categoryContainer.appendChild(div);
    });
 
 }
-
  const categoryData = async (id) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
     const data = await res.json()
-   //  console.log(data.data)
     const cardContainer = document.getElementById('card-container');
      cardContainer.innerText = '';
    //   if data is empty 
@@ -23,7 +21,7 @@ const loadCategory = async (category) => {
     const div = document.createElement('div');
     div.innerHTML = `
       <img src="images/Icon.png" alt="">
-      <h3 class="text-2xl font-bold">Oops!! Sorry, There is no content here</h3>
+      <h3 class="mt-6 text-2xl font-bold">Oops!! Sorry, There is no content here</h3>
    `
     cardContainer.appendChild(div);
        div.setAttribute('style', `
@@ -39,12 +37,17 @@ const loadCategory = async (category) => {
 //   else 
      const dataArray = data.data;
     dataArray.forEach(id => {
-         const div = document.createElement('div');      
+         const div = document.createElement('div'); 
+         const Seconds = id.others.posted_date;
+         const { hours, minutes } = convertHoursAndMinutes(Seconds);
          div.innerHTML = `
          <div class="card w-70 hover:cursor-pointer">
-               <figure class="">
+               <div class="relative">
                   <img src="${id.thumbnail}" alt="Shoes" class="w-full rounded-lg h-44" />
-               </figure>
+               </div>
+               <div class="absolute right-2 bottom-24">
+                  <p class=""> ${Seconds > 0 ? `<p class="text-slate-300 bg-black px-2 rounded-lg">${hours}h ${minutes}m ago</p>`: ''}</p>         
+               </div>
                <div class="flex p-2">
                   <div>
                      <img class=" rounded-full w-10 h-10" src="${id.authors[0].profile_picture}" alt="">
@@ -60,8 +63,12 @@ const loadCategory = async (category) => {
          cardContainer.appendChild(div);
       
     });
-   
  }
+function convertHoursAndMinutes(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  return {hours, minutes};
+}
 
 loadCategory();
 categoryData("1000")
