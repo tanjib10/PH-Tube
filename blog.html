@@ -10,8 +10,67 @@
    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-
+<body class="w-[90%] mx-auto">
+   <header class="mt-8">
+      <div class="flex justify-between items-center">
+         <div class="cursor-pointer">
+            <img src="images/name.png" alt="">
+         </div>
+         <div>
+            <a href="index.html"><button class="btn bg-red-400 text-white rounded-lg">Go back</button></a>
+         </div>
+      </div>
+   </header>
+   <h1 class="my-10 text-4xl font-bold">Here are some questions that are frequently asked : </h1>
+   <div class="">
+      <div class="my-4 collapse collapse-arrow bg-base-200">
+         <input type="radio" name="my-accordion-2" />
+         <div class="collapse-title text-2xl font-medium">
+            Discuss the scope of var, let, and const
+         </div>
+         <div class="collapse-content">
+            <ul class="p-4 text-lg font-semibold text-slate-700">
+               <li>Variables declared with var are in the function scope.
+               </li>
+               <li>Variables declared as let are in the block
+                  scope.</li>
+               <li>Variables
+                  declared as const are in the block scope.</li>
+            </ul>
+         </div>
+      </div>
+      <div class="my-4 collapse collapse-arrow bg-base-200">
+         <input type="radio" name="my-accordion-2" />
+         <div class="collapse-title text-2xl font-medium">
+            Tell us the use cases of null and undefined
+         </div>
+         <div class="collapse-content">
+            <p class="p-3 font-semibold">Undefined means the variable has been declared, but its value has not been
+               assigned. <br>
+               Null means an
+               empty
+               value or a
+               blank value. <br> The typeof() operator returns undefined for an undefined variable. The typeof()
+               operator
+               returns the type
+               as an object for a variable whose value is assigned as null.</p>
+         </div>
+      </div>
+      <div class="my-4 collapse collapse-arrow bg-base-200">
+         <input type="radio" name="my-accordion-2" />
+         <div class="collapse-title text-2xl font-medium">
+            What do you mean by REST API?
+         </div>
+         <div class="collapse-content">
+            <p class="p-3 font-semibold"> An API, or application programming interface, is a set of rules that define
+               how applications
+               or devices can connect to
+               and communicate with each other. A REST API is an API that conforms to the design principles of the REST,
+               or
+               representational state transfer architectural style. </p>
+         </div>
+      </div>
+   </div>
 </body>
 
 </html>
