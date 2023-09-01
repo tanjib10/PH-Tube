@@ -15,32 +15,53 @@ const loadCategory = async (category) => {
  const categoryData = async (id) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
     const data = await res.json()
-
-    console.log(data.data)
+   //  console.log(data.data)
     const cardContainer = document.getElementById('card-container');
      cardContainer.innerText = '';
-    data.data.forEach(id => {
-         const div = document.createElement('div');
+   //   if data is empty 
+      if (data.data.length === 0) {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <img src="images/Icon.png" alt="">
+      <h3 class="text-2xl font-bold">Oops!! Sorry, There is no content here</h3>
+   `
+    cardContainer.appendChild(div);
+       div.setAttribute('style', `
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      margin-top : 50px;
+      justify-content: center;
+      width: 100vw;
+      text-align: center;
+    `);
+  }
+//   else 
+     const dataArray = data.data;
+    dataArray.forEach(id => {
+         const div = document.createElement('div');      
          div.innerHTML = `
-         <div class="card w-70">
+         <div class="card w-70 hover:cursor-pointer">
                <figure class="">
-                  <img src="${id.thumbnail}" alt="Shoes" class="rounded-lg h-44" />
+                  <img src="${id.thumbnail}" alt="Shoes" class="w-full rounded-lg h-44" />
                </figure>
-               <div class=" flex p-3 text-center">
+               <div class="flex p-2">
                   <div>
                      <img class=" rounded-full w-10 h-10" src="${id.authors[0].profile_picture}" alt="">
                   </div>
                   <div>
                      <h2 class="text-lg font-bold mx-4">${id.title}</h2>
-                  <h3 class="text-left pl-4">${id.authors[0]?.profile_name}</h3> <span>${id.authors[0].verified} </span>
-                  <p>sdfsd</p>
+                  <h3 class="text-left pl-4">${id.authors[0]?.profile_name} <span class="inline-block items-center;">${id.authors[0].
+                     verified?'<img class="w-4" src="images/Twitter_Verified_Badge.svg.png">':''}</span> </h3
+                  <div><p class="text-left pl-4">${id.others.views} views</p></div>
                </div>
             </div>
          `
          cardContainer.appendChild(div);
-         
+      
     });
    
  }
 
 loadCategory();
+categoryData("1000")
