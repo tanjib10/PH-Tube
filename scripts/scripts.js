@@ -12,10 +12,10 @@ const loadCategory = async (category) => {
 
 }
  const categoryData = async (id) => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
-    const data = await res.json()
-    const cardContainer = document.getElementById('card-container');
-     cardContainer.innerText = '';
+   const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
+   const data = await res.json()
+   const cardContainer = document.getElementById('card-container');
+   cardContainer.innerText = '';
    //   if data is empty 
       if (data.data.length === 0) {
     const div = document.createElement('div');
@@ -30,7 +30,7 @@ const loadCategory = async (category) => {
       align-items: center; 
       margin-top : 50px;
       justify-content: center;
-      width: 100vw;
+      width: 90vw;
       text-align: center;
     `);
   }
@@ -61,7 +61,6 @@ const loadCategory = async (category) => {
             </div>
          `
          cardContainer.appendChild(div);
-      
     });
  }
 function convertHoursAndMinutes(seconds) {
@@ -69,6 +68,10 @@ function convertHoursAndMinutes(seconds) {
   const minutes = Math.floor((seconds % 3600) / 60);
   return {hours, minutes};
 }
+ const sortByViews = async () => {
+   const res = await fetch(`https://openapi.programming-hero.com/api/videos/category/${id}`)
+   const data = await res.json()
 
+}
 loadCategory();
 categoryData("1000")
